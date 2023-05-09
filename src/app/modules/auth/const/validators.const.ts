@@ -16,19 +16,19 @@ export const VALIDATORS = {
 export const defaultRules: InputRules[] = [InputRules.touched, InputRules.dirty];
 
 export const defaultErrors = {
-  required: new DescriptionRules('required', 'Поле обязательно для заполнения', [...defaultRules]),
-  email: new DescriptionRules('pattern', 'Введите корректный Email', [...defaultRules]),
-  repass: new DescriptionRules('repass', 'Пароли не совпадают', [InputRules.dirty]),
+  required: new DescriptionRules('required', 'Required field', [...defaultRules]),
+  email: new DescriptionRules('pattern', 'Email is incorrect', [...defaultRules]),
+  repass: new DescriptionRules('repass', 'Passwords don\'t match' , [InputRules.dirty]),
   minLength(length: number) {
-    return new DescriptionRules('minlength', `Минимальная длина ${length} символов`, [InputRules.dirty]);
+    return new DescriptionRules('minlength', `Minimal length is ${length} symbols`, [...defaultRules]);
   },
   maxLength(length: number) {
-    return new DescriptionRules('maxlength', `Превышена максимальная длина в ${length} символов`, [
-      InputRules.dirty
+    return new DescriptionRules('maxlength', `Maximum length of ${length} symbols is exceeded`, [
+      ...defaultRules
     ]);
   },
   pattern(pattern: string) {
-    return new DescriptionRules('pattern', `Поле должно соответствовать шаблону: ${pattern}`, [...defaultRules]);
+    return new DescriptionRules('pattern', `Field must satisfy to pattern: ${pattern}`, [...defaultRules]);
   }
 };
 

@@ -1,31 +1,65 @@
 <div class="page">
-  <header class="title">
-    Sign Up
-  </header>
+  <header class="title" data-testid="title">Sign Up</header>
   <form class="form" novalidate [formGroup]="regForm" (keydown.enter)="!isDisabled && onRegistration()">
     <mat-form-field>
       <mat-label>Username</mat-label>
-      <input matInput [formControl]="regForm.controls.username">
+      <input matInput [formControl]="regForm.controls.username" data-testid="username">
     </mat-form-field>
-    <input-error [form]="regForm" [control]="regForm.controls.username" [errors]="errors.username"></input-error>
+    <input-error
+      [form]="regForm"
+      [control]="regForm.controls.username"
+      [errors]="errors.username"
+      data-testid="username-errors"
+    ></input-error>
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="email" [formControl]="regForm.controls.email">
+      <input matInput type="email" [formControl]="regForm.controls.email" data-testid="email">
     </mat-form-field>
-    <input-error [form]="regForm" [control]="regForm.controls.email" [errors]="errors.email"></input-error>
+    <input-error
+      [form]="regForm"
+      [control]="regForm.controls.email"
+      [errors]="errors.email"
+      data-testid="email-errors"
+    ></input-error>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput type="password" [formControl]="regForm.controls.pass">
+      <input matInput type="password" [formControl]="regForm.controls.pass" data-testid="password">
     </mat-form-field>
-    <input-error [form]="regForm" [control]="regForm.controls.pass" [errors]="errors.pass"></input-error>
+    <input-error
+      [form]="regForm"
+      [control]="regForm.controls.pass"
+      [errors]="errors.pass"
+      data-testid="password-errors"
+    ></input-error>
     <mat-form-field>
       <mat-label>Repeat password</mat-label>
-      <input matInput type="password" [formControl]="regForm.controls.repass">
+      <input matInput type="password" [formControl]="regForm.controls.repass" data-testid="repass">
     </mat-form-field>
-    <input-error [form]="regForm" [control]="regForm.controls.repass" [errors]="errors.repass"></input-error>
+    <input-error
+      [form]="regForm"
+      [control]="regForm.controls.repass"
+      [errors]="errors.repass"
+      data-testid="repass-errors"
+    ></input-error>
     <div class="buttons">
-      <button class="button" color="primary" mat-raised-button [disabled]="isDisabled" (click)="onRegistration()">Sign Up</button>
-      <button class="button" mat-button [routerLink]="'/auth/signin'">Sign In</button>
+      <button
+        class="button"
+        color="primary"
+        mat-raised-button
+        [disabled]="isDisabled"
+        (click)="onRegistration()"
+        data-testid="signup"
+      >
+        Sign Up
+      </button>
+      <button
+        class="button"
+        mat-button
+        [routerLink]="'/auth/signin'"
+        data-testid="signin"
+      >
+        Sign In
+      </button>
     </div>
   </form>
 </div>

@@ -57,7 +57,7 @@ export class SignupComponent {
       )
       .subscribe(() => {
         this.snackBar.open('Account has been successfully created', undefined, {
-          duration: 3000
+          duration: 3000000,
         });
         this.router.navigate(['/auth/signin']);
       });

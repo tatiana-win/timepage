@@ -1,7 +1,5 @@
 <div class="page">
-  <header class="title">
-    Sign In
-  </header>
+  <header class="title" data-testid="title">Sign In</header>
   <form class="form" novalidate [formGroup]="logInForm" (keydown.enter)="!isDisabled && onLogin()">
     <mat-form-field>
       <mat-label>Username</mat-label>
