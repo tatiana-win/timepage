@@ -1,0 +1,13 @@
+<div>
+  <div class="todo-header">
+    <span class="todo-title">Someday</span>
+    <button mat-icon-button (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="todo-list">
+    <ng-container *ngFor="let row of rows">
+      <app-row [row]="row" (rowClick)="openDialog($event.id)" (change)="updateCompleted($event)"></app-row>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="day">
+  <div class="day-header">
+    <span class="day-date" [ngClass]="{'day-date__active': isActive }">{{ date | dateWithMonth }}</span>
+    <span class="day-name" [ngClass]="{'day-name__active': isActive }">{{ date | dayOfWeek }}</span>
+  </div>
+  <ng-container *ngFor="let row of rows; let i = index">
+    <app-row
+      [row]="row"
+      (rowClick)="openDialog($event.id)"
+      (change)="updateCompleted($event)"
+      [interactive]="i === notes.length"
+    ></app-row>
+  </ng-container>
+</div>

@@ -1,0 +1,48 @@
+@import '../../../../variables.less';
+
+.calendar {
+  padding: 12px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar-month {
+  font-size: 21px;
+  line-height: 36px;
+  font-weight: 700;
+}
+
+.calendar-buttons {
+  display: flex;
+}
+
+.calendar-button__large {
+  display: none;
+}
+
+.calendar-button:not(:first-child) {
+  margin-left: 8px;
+}
+
+.calendar-menu {
+  margin-left: 20px
+}
+
+@media @desktop {
+  .calendar-button__large {
+    display: block;
+  }
+
+  .calendar-button__mini {
+    display: none;
+  }
+
+  .calendar-month {
+    font-size: 36px;
+    line-height: 42px;
+  }
+}

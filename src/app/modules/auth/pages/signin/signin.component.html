@@ -1,0 +1,19 @@
+<div class="page">
+  <header class="title">
+    Sign In
+  </header>
+  <form class="form" novalidate [formGroup]="logInForm" (keydown.enter)="!isDisabled && onLogin()">
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput [formControl]="logInForm.controls.username">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [formControl]="logInForm.controls.pass">
+    </mat-form-field>
+    <div class="buttons">
+      <button class="button" color="primary" mat-raised-button [disabled]="isDisabled" (click)="onLogin()">Sign In</button>
+      <button class="button" mat-button [routerLink]="'/auth/signup'">Sign Up</button>
+    </div>
+  </form>
+</div>

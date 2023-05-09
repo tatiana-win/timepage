@@ -1,0 +1,7 @@
+<ng-container class="error" [formGroup]="form">
+    <ng-container *ngFor="let error of errors">
+      <span class="error" *ngIf="control.hasError(error.name) && isRulesApplied(error)">
+        {{ error.description }}
+      </span>
+    </ng-container>
+</ng-container>

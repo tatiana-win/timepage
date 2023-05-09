@@ -1,0 +1,30 @@
+@import '../../../../variables.less';
+
+:host {
+  display: flex;
+}
+
+.week {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  flex: 1;
+}
+
+.week-day {
+  margin-top: 20px;
+}
+
+@media @desktop {
+  .week {
+    flex-direction: row;
+  }
+
+  .week-day {
+    width: calc((100% - 120px) / 7);
+
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+}

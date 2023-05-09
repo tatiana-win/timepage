@@ -1,0 +1,14 @@
+<div class="row" [ngClass]="{ 'row__interactive': isInteractive }" (click)="isInteractive ? onClick($event) : undefined">
+      <span
+        [ngClass]="['row-text', row.color || '', !!row.completed ? 'row-text__completed' : '']"
+      >
+        {{ row.text }}
+      </span>
+  <mat-checkbox
+    *ngIf="!!row.text"
+    [(ngModel)]="row.completed"
+    (change)="onChange($event)"
+    class="row-checkbox"
+  >
+  </mat-checkbox>
+</div>

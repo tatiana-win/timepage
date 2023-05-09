@@ -1,0 +1,30 @@
+@import '../../../../variables.less';
+
+.todo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  margin-top: 40px;
+}
+
+.todo-title {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 700;
+  color: #999;
+}
+
+@media @desktop {
+  .todo-header {
+    font-size: 21px;
+    max-width: 32%;
+  }
+
+  .todo-list {
+    display: grid;
+    grid-template-columns: 32% 31% 31%;
+    grid-template-rows: 40px 40px 40px 40px;
+    column-gap: 2%;
+  }
+}
