@@ -9,6 +9,7 @@
       (rowClick)="openDialog($event.id)"
       (change)="updateCompleted($event)"
       [interactive]="i === notes.length"
+      [attr.data-testid]= "(date | dateWithMonth) + ' ' +i"
     ></app-row>
   </ng-container>
 </div>

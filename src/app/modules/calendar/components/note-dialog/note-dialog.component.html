@@ -1,12 +1,22 @@
-<div mat-dialog-content class="dialog">
+<div mat-dialog-content class="dialog" data-testid="note-dialog">
   <form class="form" novalidate [formGroup]="noteForm" (keydown.enter)="!noteForm.invalid && save()">
     <mat-form-field>
-      <input matInput [formControl]="noteForm.controls.title" autofocus>
+      <input
+        matInput
+        [formControl]="noteForm.controls.title"
+        data-testid="title"
+        autofocus
+      >
     </mat-form-field>
     <div class="dialog-row">
       <mat-form-field class="dialog-calendar" *ngIf="withDate" appearance="fill">
         <mat-label>Choose a date</mat-label>
-        <input matInput [formControl]="noteForm.controls.date" [matDatepicker]="picker">
+        <input
+          matInput
+          [formControl]="noteForm.controls.date"
+          [matDatepicker]="picker"
+          data-testid="date"
+        >
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
@@ -22,10 +32,24 @@
   </form>
 </div>
 <div class="dialog-footer">
-  <button class="button dialog-button" color="secondary" mat-raised-button [disabled]="!note?.id" (click)="delete()">
+  <button
+    class="button dialog-button"
+    color="secondary"
+    mat-raised-button
+    [disabled]="!note?.id"
+    (click)="delete()"
+    data-testid="delete"
+  >
     Delete
   </button>
-  <button class="button dialog-button" color="primary" mat-raised-button [disabled]="noteForm.invalid" (click)="save()">
+  <button
+    class="button dialog-button"
+    color="primary"
+    mat-raised-button
+    [disabled]="noteForm.invalid"
+    (click)="save()"
+    data-testid="save"
+  >
     Save
   </button>
 </div>

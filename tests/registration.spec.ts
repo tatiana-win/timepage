@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { CONFIG } from '../../src/config';
+import { CONFIG } from '../src/config';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(`${CONFIG.baseUrl}/auth/signup`);

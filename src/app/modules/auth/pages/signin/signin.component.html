@@ -3,15 +3,28 @@
   <form class="form" novalidate [formGroup]="logInForm" (keydown.enter)="!isDisabled && onLogin()">
     <mat-form-field>
       <mat-label>Username</mat-label>
-      <input matInput [formControl]="logInForm.controls.username">
+      <input matInput [formControl]="logInForm.controls.username" data-testid="username">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput type="password" [formControl]="logInForm.controls.pass">
+      <input matInput type="password" [formControl]="logInForm.controls.pass" data-testid="password">
     </mat-form-field>
     <div class="buttons">
-      <button class="button" color="primary" mat-raised-button [disabled]="isDisabled" (click)="onLogin()">Sign In</button>
-      <button class="button" mat-button [routerLink]="'/auth/signup'">Sign Up</button>
+      <button
+        class="button"
+        color="primary"
+        mat-raised-button
+        [disabled]="isDisabled"
+        (click)="onLogin()"
+        data-testid="signin"
+      >
+        Sign In
+      </button>
+      <button
+        class="button"
+        mat-button [routerLink]="'/auth/signup'"
+        data-testid="signup"
+      >Sign Up</button>
     </div>
   </form>
 </div>

@@ -1,13 +1,18 @@
 <div>
   <div class="todo-header">
     <span class="todo-title">Someday</span>
-    <button mat-icon-button (click)="openDialog()">
+    <button mat-icon-button (click)="openDialog()" data-testid="add-todo">
       <mat-icon>add</mat-icon>
     </button>
   </div>
-  <div class="todo-list">
-    <ng-container *ngFor="let row of rows">
-      <app-row [row]="row" (rowClick)="openDialog($event.id)" (change)="updateCompleted($event)"></app-row>
+  <div class="todo-list" data-testid="todo-list">
+    <ng-container *ngFor="let row of rows; let i = index">
+      <app-row
+        [row]="row"
+        (rowClick)="openDialog($event.id)"
+        (change)="updateCompleted($event)"
+        [attr.data-testid]= "'row' + ' ' + (i + 1)"
+      ></app-row>
     </ng-container>
   </div>
 </div>
