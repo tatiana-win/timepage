@@ -62,7 +62,7 @@ export class SignupComponent {
       .pipe(filter(Boolean))
       .subscribe(() => {
         this.snackBar.open('Account has been successfully created', undefined, {
-          duration: 3000000,
+          duration: 3000,
         });
         this.router.navigate(['/auth/signin']);
       });
