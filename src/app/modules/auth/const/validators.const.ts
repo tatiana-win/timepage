@@ -13,7 +13,7 @@ export const VALIDATORS = {
   EMAIL_REQUIRED: [Validators.required, Validators.pattern(EMAIL_PATTERN)],
 };
 
-export const defaultRules: InputRules[] = [InputRules.touched, InputRules.dirty];
+export const defaultRules: InputRules[] = [InputRules.dirty];
 
 export const defaultErrors = {
   required: new DescriptionRules('required', 'Required field', [...defaultRules]),

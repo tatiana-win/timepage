@@ -1,15 +1,14 @@
-.dialog {
-  width: 400px;
-}
+@import '../../../../../variables.less';
 
 .dialog-row {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
 }
 
 .dialog-color {
   margin-left: 20px;
+  display: flex;
   cursor: pointer;
 
   input {
@@ -18,11 +17,11 @@
 }
 
 .dialog-calendar {
-  margin-right: 20px;
+  display: flex;
 }
 
 .dialog-select {
-  width: 200px;
+  display: flex;
 }
 
 .dialog-button {
@@ -43,4 +42,22 @@
   overflow: hidden;
   width: 70px;
   text-align: center;
+}
+
+@media @desktop {
+  .dialog {
+    width: 400px;
+  }
+
+  .dialog-row {
+    flex-direction: row;
+  }
+
+  .dialog-select {
+    width: 200px;
+  }
+
+  .dialog-calendar {
+    margin-right: 20px;
+  }
 }

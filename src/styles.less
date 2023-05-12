@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import './variables';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -26,36 +27,36 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .divider {
   margin: 20px 0;
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid @divider-color;
 }
 
 .link {
   text-decoration: underline;
-  color: #3f51b5;
+  color: @base-color;
 
   &:hover, &:active {
-    color: #673ab7;
+    color: @active-color;
   }
 }
 
 .red {
-  background: #e00052;
-  color: #fff;
+  background: @red;
+  color: @white;
 }
 
 .yellow {
-  background: #fdef5d;
-  color: #000;
+  background: @yellow;
+  color: @black;
 }
 
 .blue {
-  background: #3f51b5;
-  color: #fff;
+  background: @base-color;
+  color: @white;
 }
 
 .green {
-  background: #00897b;
-  color: #fff;
+  background: @green;
+  color: @white;
 }
 
 
