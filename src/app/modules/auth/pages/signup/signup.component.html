@@ -41,25 +41,20 @@
       [errors]="errors.repass"
       data-testid="repass-errors"
     ></input-error>
-    <div class="buttons">
-      <button
-        class="button"
-        color="primary"
-        mat-raised-button
-        [disabled]="isDisabled"
-        (click)="onRegistration()"
-        data-testid="signup"
-      >
-        Sign Up
-      </button>
-      <button
-        class="button"
-        mat-button
-        [routerLink]="'/auth/signin'"
-        data-testid="signin"
-      >
-        Sign In
-      </button>
+    <button
+      class="signup-button"
+      color="primary"
+      mat-raised-button
+      [disabled]="isDisabled"
+      (click)="onRegistration()"
+      data-testid="signup"
+    >
+      Sign Up
+    </button>
+    <div class="divider"></div>
+    <div class="signup-block">
+      <span>Do you have an account?</span>
+      <a class="signup-login link" routerLink="/auth/signin" data-testid="signin">Sign In</a>
     </div>
   </form>
 </div>

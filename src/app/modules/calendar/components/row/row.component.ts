@@ -20,6 +20,10 @@ export class RowComponent {
   }
 
   onClick(event: MouseEvent) {
+    // @ts-ignore
+    if (event.target?.getAttribute('type') === 'checkbox') {
+      return;
+    }
     event.stopPropagation();
     event.preventDefault();
     this.rowClick.emit(this.row);

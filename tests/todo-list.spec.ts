@@ -49,7 +49,7 @@ test.describe("todo list", () => {
     await page.getByTestId('save').click();
     await expect(page.getByTestId('note-dialog')).toBeHidden();
 
-    await page.getByTestId('row 1').click();
+    await page.getByText('note to edit').click();
     await page.getByTestId('title').type('edited note');
     await page.getByTestId('save').click();
 

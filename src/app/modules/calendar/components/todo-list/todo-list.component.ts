@@ -21,11 +21,19 @@ export class TodoListComponent {
 
   rows: Row[] = [];
 
+  minRowsCount = MIN_ROWS_COUNT;
+
   constructor(public dialog: MatDialog, private store: Store<AppState>) {
     this.store.select(selectTodoNotes)
       .subscribe(notes => {
         this.notes = notes ?? [];
-        this.rows = fillRows(this.notes, MIN_ROWS_COUNT);
+        const minRowsCount = this.minRowsCount > this.notes.length ? this.minRowsCount : (this.notes.length + 3 - this.notes.length % 3);
+
+        if (minRowsCount > this.minRowsCount) {
+          this.minRowsCount = minRowsCount;
+        }
+
+        this.rows = fillRows(this.notes, minRowsCount);
       })
     this.rows = fillRows(this.notes, MIN_ROWS_COUNT);
   }

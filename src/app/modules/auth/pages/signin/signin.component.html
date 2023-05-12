@@ -9,22 +9,20 @@
       <mat-label>Password</mat-label>
       <input matInput type="password" [formControl]="logInForm.controls.pass" data-testid="password">
     </mat-form-field>
-    <div class="buttons">
-      <button
-        class="button"
-        color="primary"
-        mat-raised-button
-        [disabled]="isDisabled"
-        (click)="onLogin()"
-        data-testid="signin"
-      >
-        Sign In
-      </button>
-      <button
-        class="button"
-        mat-button [routerLink]="'/auth/signup'"
-        data-testid="signup"
-      >Sign Up</button>
+    <button
+      class="login-button"
+      color="primary"
+      mat-raised-button
+      [disabled]="isDisabled"
+      (click)="onLogin()"
+      data-testid="signin"
+    >
+      Sign In
+    </button>
+    <div class="divider"></div>
+    <div class="login-block">
+      <span>Don't have an account?</span>
+      <a class="login-registration link" routerLink="/auth/signup" data-testid="signup">Sign Up</a>
     </div>
   </form>
 </div>
