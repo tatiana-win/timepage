@@ -5,42 +5,42 @@
       <mat-label>Username</mat-label>
       <input matInput [formControl]="regForm.controls.username" data-testid="username">
     </mat-form-field>
-    <input-error
+    <app-input-error
       [form]="regForm"
       [control]="regForm.controls.username"
       [errors]="errors.username"
       data-testid="username-errors"
-    ></input-error>
+    ></app-input-error>
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input matInput type="email" [formControl]="regForm.controls.email" data-testid="email">
     </mat-form-field>
-    <input-error
+    <app-input-error
       [form]="regForm"
       [control]="regForm.controls.email"
       [errors]="errors.email"
       data-testid="email-errors"
-    ></input-error>
+    ></app-input-error>
     <mat-form-field>
       <mat-label>Password</mat-label>
       <input matInput type="password" [formControl]="regForm.controls.pass" data-testid="password">
     </mat-form-field>
-    <input-error
+    <app-input-error
       [form]="regForm"
       [control]="regForm.controls.pass"
       [errors]="errors.pass"
       data-testid="password-errors"
-    ></input-error>
+    ></app-input-error>
     <mat-form-field>
       <mat-label>Repeat password</mat-label>
       <input matInput type="password" [formControl]="regForm.controls.repass" data-testid="repass">
     </mat-form-field>
-    <input-error
+    <app-input-error
       [form]="regForm"
       [control]="regForm.controls.repass"
       [errors]="errors.repass"
       data-testid="repass-errors"
-    ></input-error>
+    ></app-input-error>
     <button
       class="signup-button"
       color="primary"

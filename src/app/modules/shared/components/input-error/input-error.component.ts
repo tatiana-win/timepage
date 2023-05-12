@@ -3,7 +3,7 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 import { DescriptionRules } from '../../../../models/input-rules.model';
 
 @Component({
-    selector: 'input-error',
+    selector: 'app-input-error',
     templateUrl: './input-error.component.html',
     styleUrls: ['./input-error.component.less'],
     changeDetection: ChangeDetectionStrategy.Default

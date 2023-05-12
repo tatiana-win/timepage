@@ -20,7 +20,7 @@ export class ApiInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<HTTPRequestBody>, next: HttpHandler): Observable<HttpEvent<HTTPResponseBody>> {
-    let req$ = next.handle(request.clone({
+    const req$ = next.handle(request.clone({
       headers: request.headers.set('x-access-token', localStorage.getItem('token') || '')
     }));
 

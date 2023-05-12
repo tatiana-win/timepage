@@ -4,7 +4,7 @@ import { DescriptionRules, InputRules } from '../../../models/input-rules.model'
 export const PASSWORD_MIN_LENGTH = 6;
 export const LOGIN_MIN_LENGTH = 6;
 
-const EMAIL_PATTERN = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const EMAIL_PATTERN = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export const VALIDATORS = {
   LOGIN: [Validators.required, Validators.minLength(LOGIN_MIN_LENGTH)],

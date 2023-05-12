@@ -13,7 +13,7 @@ export class RowComponent {
   @Input() interactive?: boolean;
 
   @Output() rowClick = new EventEmitter<Row>;
-  @Output() change = new EventEmitter<Row>;
+  @Output() rowChange = new EventEmitter<Row>;
 
   get isInteractive() {
     return !!this.row.text || this.interactive;
@@ -30,6 +30,6 @@ export class RowComponent {
   }
 
   onChange({ checked }: MatCheckboxChange) {
-    this.change.emit({ ...this.row, completed: checked });
+    this.rowChange.emit({ ...this.row, completed: checked });
   }
 }
