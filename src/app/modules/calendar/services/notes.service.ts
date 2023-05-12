@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CONFIG } from '../../../../config';
 import { Note } from '../../../models/note.model';
+import { v4 as uuid } from 'uuid';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,7 +27,7 @@ export class NotesService {
   createNote(note: Omit<Note, 'id'>): Observable<any> {
     const data: Note = {
       ...note,
-      id: crypto.randomUUID()
+      id: uuid()
     }
     return this.http.post(`${CONFIG.apiUrl}/notes`, data, httpOptions);
   }
