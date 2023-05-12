@@ -8,7 +8,7 @@ export const getStartOfWeek = (date: Date) => {
   result.setDate(date.getDate() - dayOfWeek + 1);
 
   return result;
-}
+};
 
 /**
  * Returns date of Sunday for week that contains passed date
@@ -20,7 +20,7 @@ export const getEndOfWeek = (date: Date) => {
   result.setDate(startOfWeek.getDate() + 6);
 
   return result;
-}
+};
 
 /**
  * Returns new date calculated as passed date - passed days
@@ -32,7 +32,7 @@ export const subtractDays = (date: Date, days: number) => {
   result.setDate(date.getDate() - days);
 
   return result;
-}
+};
 
 /**
  * Returns new date calculated as passed date + passed days
@@ -44,7 +44,7 @@ export const addDays = (date: Date, days: number) => {
   result.setDate(date.getDate() + days);
 
   return result;
-}
+};
 
 /**
  * Returns true if passed date is the same as current date
@@ -53,7 +53,9 @@ export const addDays = (date: Date, days: number) => {
 export const isToday = (date: Date) => {
   const now = new Date();
 
-  return now.getFullYear() === date.getFullYear() &&
+  return (
+    now.getFullYear() === date.getFullYear() &&
     now.getMonth() === date.getMonth() &&
-    now.getDate() === date.getDate();
-}
+    now.getDate() === date.getDate()
+  );
+};

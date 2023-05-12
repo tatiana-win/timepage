@@ -15,16 +15,16 @@ import { authReducer } from './store/auth.reducer';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedModule } from '../shared/shared.module';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import {
+  ErrorStateMatcher,
+  ShowOnDirtyErrorStateMatcher,
+} from '@angular/material/core';
 
 @NgModule({
-  declarations: [
-    SigninComponent,
-    SignupComponent
-  ],
+  declarations: [SigninComponent, SignupComponent],
   providers: [
     AuthService,
-    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
   ],
   imports: [
     CommonModule,
@@ -38,8 +38,7 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
     StoreModule.forFeature('auth', authReducer),
     HttpClientModule,
     MatSnackBarModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
-export class AuthModule {
-}
+export class AuthModule {}

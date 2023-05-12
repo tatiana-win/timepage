@@ -1,5 +1,8 @@
 import { Validators } from '@angular/forms';
-import { DescriptionRules, InputRules } from '../../../models/input-rules.model';
+import {
+  DescriptionRules,
+  InputRules,
+} from '../../../models/input-rules.model';
 
 export const PASSWORD_MIN_LENGTH = 6;
 export const LOGIN_MIN_LENGTH = 6;
@@ -16,20 +19,36 @@ export const VALIDATORS = {
 export const defaultRules: InputRules[] = [InputRules.dirty];
 
 export const defaultErrors = {
-  required: new DescriptionRules('required', 'Required field', [...defaultRules]),
-  email: new DescriptionRules('pattern', 'Email is incorrect', [...defaultRules]),
-  repass: new DescriptionRules('repass', 'Passwords don\'t match' , [InputRules.dirty]),
+  required: new DescriptionRules('required', 'Required field', [
+    ...defaultRules,
+  ]),
+  email: new DescriptionRules('pattern', 'Email is incorrect', [
+    ...defaultRules,
+  ]),
+  repass: new DescriptionRules('repass', "Passwords don't match", [
+    InputRules.dirty,
+  ]),
   minLength(length: number) {
-    return new DescriptionRules('minlength', `Minimal length is ${length} symbols`, [...defaultRules]);
+    return new DescriptionRules(
+      'minlength',
+      `Minimal length is ${length} symbols`,
+      [...defaultRules],
+    );
   },
   maxLength(length: number) {
-    return new DescriptionRules('maxlength', `Maximum length of ${length} symbols is exceeded`, [
-      ...defaultRules
-    ]);
+    return new DescriptionRules(
+      'maxlength',
+      `Maximum length of ${length} symbols is exceeded`,
+      [...defaultRules],
+    );
   },
   pattern(pattern: string) {
-    return new DescriptionRules('pattern', `Field must satisfy to pattern: ${pattern}`, [...defaultRules]);
-  }
+    return new DescriptionRules(
+      'pattern',
+      `Field must satisfy to pattern: ${pattern}`,
+      [...defaultRules],
+    );
+  },
 };
 
 export const VALIDATION_ERRORS = {
@@ -40,6 +59,6 @@ export const VALIDATION_ERRORS = {
   REPASS: [
     defaultErrors.required,
     defaultErrors.pattern('строки'),
-    defaultErrors.repass
-  ]
+    defaultErrors.repass,
+  ],
 };

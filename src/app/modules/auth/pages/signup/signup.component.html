@@ -1,9 +1,18 @@
 <div class="page">
   <header class="title" data-testid="title">Sign Up</header>
-  <form class="form" novalidate [formGroup]="regForm" (keydown.enter)="!isDisabled && onRegistration()">
+  <form
+    class="form"
+    novalidate
+    [formGroup]="regForm"
+    (keydown.enter)="!isDisabled && onRegistration()"
+  >
     <mat-form-field>
       <mat-label>Username</mat-label>
-      <input matInput [formControl]="regForm.controls.username" data-testid="username">
+      <input
+        matInput
+        [formControl]="regForm.controls.username"
+        data-testid="username"
+      />
     </mat-form-field>
     <app-input-error
       [form]="regForm"
@@ -13,7 +22,12 @@
     ></app-input-error>
     <mat-form-field>
       <mat-label>Email</mat-label>
-      <input matInput type="email" [formControl]="regForm.controls.email" data-testid="email">
+      <input
+        matInput
+        type="email"
+        [formControl]="regForm.controls.email"
+        data-testid="email"
+      />
     </mat-form-field>
     <app-input-error
       [form]="regForm"
@@ -23,7 +37,12 @@
     ></app-input-error>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput type="password" [formControl]="regForm.controls.pass" data-testid="password">
+      <input
+        matInput
+        type="password"
+        [formControl]="regForm.controls.pass"
+        data-testid="password"
+      />
     </mat-form-field>
     <app-input-error
       [form]="regForm"
@@ -33,7 +52,12 @@
     ></app-input-error>
     <mat-form-field>
       <mat-label>Repeat password</mat-label>
-      <input matInput type="password" [formControl]="regForm.controls.repass" data-testid="repass">
+      <input
+        matInput
+        type="password"
+        [formControl]="regForm.controls.repass"
+        data-testid="repass"
+      />
     </mat-form-field>
     <app-input-error
       [form]="regForm"
@@ -54,7 +78,12 @@
     <div class="divider"></div>
     <div class="signup-block">
       <span>Do you have an account?</span>
-      <a class="signup-login link" routerLink="/auth/signin" data-testid="signin">Sign In</a>
+      <a
+        class="signup-login link"
+        routerLink="/auth/signin"
+        data-testid="signin"
+        >Sign In</a
+      >
     </div>
   </form>
 </div>

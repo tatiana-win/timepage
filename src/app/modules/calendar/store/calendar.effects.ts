@@ -8,70 +8,104 @@ import {
   createNote,
   deleteNote,
   loadCalendarNotes,
-  loadNotesError, loadTodoNotes, todoNotesLoaded,
+  loadNotesError,
+  loadTodoNotes,
+  todoNotesLoaded,
   setRequestSucceded,
-  updateNote
+  updateNote,
 } from './calendar.actions';
 
 @Injectable()
 export class CalendarEffects {
-  loadCalendarNotes$ = createEffect(() => this.actions$.pipe(
+  loadCalendarNotes$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(loadCalendarNotes.type),
       exhaustMap(({ startDate, endDate }) =>
-        (this.notesService.getNotes(startDate, endDate))
-          .pipe(
-            map((result) => (calendarNotesLoaded({ calendarNotes: result }))),
-            catchError((error) => of(loadNotesError({ error: error?.error?.message || 'Unknown error'  })))
-          ))
-    )
+        this.notesService.getNotes(startDate, endDate).pipe(
+          map(result => calendarNotesLoaded({ calendarNotes: result })),
+          catchError(error =>
+            of(
+              loadNotesError({
+                error: error?.error?.message || 'Unknown error',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
-  loadTodoNotes$ = createEffect(() => this.actions$.pipe(
+  loadTodoNotes$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(loadTodoNotes.type),
       exhaustMap(() =>
-        (this.notesService.getNotes())
-          .pipe(
-            map((result) => (todoNotesLoaded({ todoNotes: result }))),
-            catchError((error) => of(loadNotesError({ error: error?.error?.message || 'Unknown error'  })))
-          ))
-    )
+        this.notesService.getNotes().pipe(
+          map(result => todoNotesLoaded({ todoNotes: result })),
+          catchError(error =>
+            of(
+              loadNotesError({
+                error: error?.error?.message || 'Unknown error',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
-  createNote$ = createEffect(() => this.actions$.pipe(
+  createNote$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(createNote.type),
-      exhaustMap((note) =>
-        (this.notesService.createNote(note))
-          .pipe(
-            map(() => (setRequestSucceded())),
-            catchError((error) => of(loadNotesError({ error: error?.error?.message || 'Unknown error'  })))
-          ))
-    )
+      exhaustMap(note =>
+        this.notesService.createNote(note).pipe(
+          map(() => setRequestSucceded()),
+          catchError(error =>
+            of(
+              loadNotesError({
+                error: error?.error?.message || 'Unknown error',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
-  updateNote$ = createEffect(() => this.actions$.pipe(
+  updateNote$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(updateNote.type),
-      exhaustMap((note) =>
-        (this.notesService.updateNote(note))
-          .pipe(
-            map(() => (setRequestSucceded())),
-            catchError((error) => of(loadNotesError({ error: error?.error?.message || 'Unknown error'  })))
-          ))
-    )
+      exhaustMap(note =>
+        this.notesService.updateNote(note).pipe(
+          map(() => setRequestSucceded()),
+          catchError(error =>
+            of(
+              loadNotesError({
+                error: error?.error?.message || 'Unknown error',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
-  deleteNote$ = createEffect(() => this.actions$.pipe(
+  deleteNote$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(deleteNote.type),
-      exhaustMap((note) =>
-        (this.notesService.deleteNote(note))
-          .pipe(
-            map(() => (setRequestSucceded())),
-            catchError((error) => of(loadNotesError({ error: error?.error?.message || 'Unknown error'  })))
-          ))
-    )
+      exhaustMap(note =>
+        this.notesService.deleteNote(note).pipe(
+          map(() => setRequestSucceded()),
+          catchError(error =>
+            of(
+              loadNotesError({
+                error: error?.error?.message || 'Unknown error',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
   );
 
-  constructor(
-    private actions$: Actions,
-    private notesService: NotesService
-  ) {}
+  constructor(private actions$: Actions, private notesService: NotesService) {}
 }

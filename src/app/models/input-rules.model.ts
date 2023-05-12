@@ -3,9 +3,13 @@
  */
 export const enum InputRules {
   touched = 'touched',
-  dirty = 'dirty'
+  dirty = 'dirty',
 }
 
 export class DescriptionRules {
-  constructor(public name: string, public description: string, public rules: InputRules[]) {}
+  constructor(
+    public name: string,
+    public description: string,
+    public rules: InputRules[],
+  ) {}
 }

@@ -14,7 +14,7 @@ const MIN_ROWS_COUNT = 12;
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.less']
+  styleUrls: ['./todo-list.component.less'],
 })
 export class TodoListComponent {
   notes: Note[] = [];
@@ -24,17 +24,19 @@ export class TodoListComponent {
   minRowsCount = MIN_ROWS_COUNT;
 
   constructor(public dialog: MatDialog, private store: Store<AppState>) {
-    this.store.select(selectTodoNotes)
-      .subscribe(notes => {
-        this.notes = notes ?? [];
-        const minRowsCount = this.minRowsCount > this.notes.length ? this.minRowsCount : (this.notes.length + 3 - this.notes.length % 3);
+    this.store.select(selectTodoNotes).subscribe(notes => {
+      this.notes = notes ?? [];
+      const minRowsCount =
+        this.minRowsCount > this.notes.length
+          ? this.minRowsCount
+          : this.notes.length + 3 - (this.notes.length % 3);
 
-        if (minRowsCount > this.minRowsCount) {
-          this.minRowsCount = minRowsCount;
-        }
+      if (minRowsCount > this.minRowsCount) {
+        this.minRowsCount = minRowsCount;
+      }
 
-        this.rows = fillRows(this.notes, minRowsCount);
-      })
+      this.rows = fillRows(this.notes, minRowsCount);
+    });
     this.rows = fillRows(this.notes, MIN_ROWS_COUNT);
   }
 

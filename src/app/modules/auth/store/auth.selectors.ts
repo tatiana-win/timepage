@@ -6,20 +6,20 @@ export const selectAuthStore = (state: AppState) => state.auth;
 
 export const selectLoading = createSelector(
   selectAuthStore,
-  (state: AuthState) => state.loading
+  (state: AuthState) => state.loading,
 );
 
 export const selectRegistrationLogin = createSelector(
   selectAuthStore,
-  (state: AuthState) => state.registrationLogin
+  (state: AuthState) => state.registrationLogin,
 );
 
 export const selectIsAuth = createSelector(
   selectAuthStore,
-  (state: AuthState) => state.isAuth
+  (state: AuthState) => state.isAuth,
 );
 
 export const selectError = createSelector(
   selectAuthStore,
-  (state: AuthState) => state.error
+  (state: AuthState) => state.error,
 );

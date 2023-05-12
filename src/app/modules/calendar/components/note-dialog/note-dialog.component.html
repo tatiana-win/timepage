@@ -1,23 +1,35 @@
 <div mat-dialog-content class="dialog" data-testid="note-dialog">
-  <form class="form" novalidate [formGroup]="noteForm" (keydown.enter)="!noteForm.invalid && save()">
+  <form
+    class="form"
+    novalidate
+    [formGroup]="noteForm"
+    (keydown.enter)="!noteForm.invalid && save()"
+  >
     <mat-form-field>
       <input
         matInput
         [formControl]="noteForm.controls.title"
         data-testid="title"
         autofocus
-      >
+      />
     </mat-form-field>
     <div class="dialog-row">
-      <mat-form-field class="dialog-calendar" *ngIf="withDate" appearance="fill">
+      <mat-form-field
+        class="dialog-calendar"
+        *ngIf="withDate"
+        appearance="fill"
+      >
         <mat-label>Choose a date</mat-label>
         <input
           matInput
           [formControl]="noteForm.controls.date"
           [matDatepicker]="picker"
           data-testid="date"
-        >
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field class="dialog-select">

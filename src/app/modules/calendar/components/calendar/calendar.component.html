@@ -1,26 +1,62 @@
 <div class="calendar">
   <div class="calendar-header">
-    <span class="calendar-month">{{ startDate | headerDate}}</span>
+    <span class="calendar-month">{{ startDate | headerDate }}</span>
 
     <div class="calendar-buttons">
-      <button class="calendar-button calendar-button__mini" mat-mini-fab color="primary" aria-label="Back" (click)="onBackClick()">
+      <button
+        class="calendar-button calendar-button__mini"
+        mat-mini-fab
+        color="primary"
+        aria-label="Back"
+        (click)="onBackClick()"
+      >
         <mat-icon>arrow_back_ios_new</mat-icon>
       </button>
-      <button class="calendar-button calendar-button__mini" mat-mini-fab color="primary" aria-label="Forward" (click)="onForwardClick()">
+      <button
+        class="calendar-button calendar-button__mini"
+        mat-mini-fab
+        color="primary"
+        aria-label="Forward"
+        (click)="onForwardClick()"
+      >
         <mat-icon>arrow_forward_ios_new</mat-icon>
       </button>
 
-      <button class="calendar-button calendar-button__large" mat-fab color="primary" aria-label="Back" (click)="onBackClick()">
+      <button
+        class="calendar-button calendar-button__large"
+        mat-fab
+        color="primary"
+        aria-label="Back"
+        (click)="onBackClick()"
+      >
         <mat-icon>arrow_back_ios_new</mat-icon>
       </button>
-      <button class="calendar-button calendar-button__large" mat-fab color="primary" aria-label="Forward" (click)="onForwardClick()">
+      <button
+        class="calendar-button calendar-button__large"
+        mat-fab
+        color="primary"
+        aria-label="Forward"
+        (click)="onForwardClick()"
+      >
         <mat-icon>arrow_forward_ios_new</mat-icon>
       </button>
 
-      <button class="calendar-button__mini calendar-menu" mat-mini-fab color="basic" aria-label="Menu" [matMenuTriggerFor]="menu" >
+      <button
+        class="calendar-button__mini calendar-menu"
+        mat-mini-fab
+        color="basic"
+        aria-label="Menu"
+        [matMenuTriggerFor]="menu"
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
-      <button class="calendar-button__large calendar-menu" mat-fab color="basic" aria-label="Menu" [matMenuTriggerFor]="menu">
+      <button
+        class="calendar-button__large calendar-menu"
+        mat-fab
+        color="basic"
+        aria-label="Menu"
+        [matMenuTriggerFor]="menu"
+      >
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -30,7 +66,6 @@
         </button>
       </mat-menu>
     </div>
-
   </div>
   <app-week [startDate]="startDate"></app-week>
   <app-todo-list></app-todo-list>

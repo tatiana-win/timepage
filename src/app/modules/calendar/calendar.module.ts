@@ -39,7 +39,7 @@ import { RowComponent } from './components/row/row.component';
     WeekComponent,
     NoteDialogComponent,
     TodoListComponent,
-    RowComponent
+    RowComponent,
   ],
   imports: [
     CommonModule,
@@ -58,12 +58,12 @@ import { RowComponent } from './components/row/row.component';
     MatSelectModule,
     MatMenuModule,
     MatCheckboxModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
     NotesService,
     AuthService,
     { provide: MAT_DATE_LOCALE, useValue: 'ru-RU' },
-  ]
+  ],
 })
-export class CalendarModule { }
+export class CalendarModule {}

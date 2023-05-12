@@ -13,25 +13,24 @@ import { ApiInterceptor } from './interceptors/api.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        EffectsModule.forRoot([]),
-        StoreModule.forRoot({}, {}),
-        AuthModule,
-        CalendarModule,
-        AppRouter
-    ],
-    providers: [
-        {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
-        {provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true},
-    ],
-    exports: [
-        AppComponent
-    ],
-    bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    EffectsModule.forRoot([]),
+    StoreModule.forRoot({}, {}),
+    AuthModule,
+    CalendarModule,
+    AppRouter,
+  ],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+  ],
+  exports: [AppComponent],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

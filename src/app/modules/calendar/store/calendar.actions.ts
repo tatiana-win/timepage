@@ -3,52 +3,42 @@ import { Note } from '../../../models/note.model';
 
 export const loadCalendarNotes = createAction(
   '[Calendar] Load Calendar Notes',
-  props<{ startDate: string; endDate: string }>()
+  props<{ startDate: string; endDate: string }>(),
 );
 
-export const loadTodoNotes = createAction(
-  '[Calendar] Load Todo Notes'
-);
+export const loadTodoNotes = createAction('[Calendar] Load Todo Notes');
 
 export const calendarNotesLoaded = createAction(
   '[Calendar] Calendar Notes Loaded',
-  props<{calendarNotes: Record<string, Note[]>}>()
+  props<{ calendarNotes: Record<string, Note[]> }>(),
 );
 
 export const todoNotesLoaded = createAction(
   '[Calendar] Todo Notes Loaded',
-  props<{ todoNotes: Note[]}>()
+  props<{ todoNotes: Note[] }>(),
 );
 
 export const loadNotesError = createAction(
   '[Calendar] Load Notes Error',
-  props<{ error: string }>()
+  props<{ error: string }>(),
 );
 
 export const createNote = createAction(
   '[Calendar] Create Note',
-  props<Omit<Note, 'id'>>()
+  props<Omit<Note, 'id'>>(),
 );
 
-export const updateNote = createAction(
-  '[Calendar] Update Note',
-  props<Note>()
-);
+export const updateNote = createAction('[Calendar] Update Note', props<Note>());
 
-export const deleteNote = createAction(
-  '[Calendar] Delete Note',
-  props<Note>()
-);
+export const deleteNote = createAction('[Calendar] Delete Note', props<Note>());
 
-export const setRequestSucceded = createAction(
-  '[Calendar] Request Succeded'
-);
+export const setRequestSucceded = createAction('[Calendar] Request Succeded');
 
 export const resetRequestSucceded = createAction(
-  '[Calendar] Reset Request Succeded'
+  '[Calendar] Reset Request Succeded',
 );
 
 export const updateMinRowsCount = createAction(
   '[Calendar] Update Min Rows Count',
-  props<{ count: number }>()
+  props<{ count: number }>(),
 );

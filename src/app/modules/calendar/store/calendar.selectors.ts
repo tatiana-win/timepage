@@ -6,40 +6,41 @@ export const selectCalendarStore = (state: AppState) => state.calendar;
 
 export const selectLoading = createSelector(
   selectCalendarStore,
-  (state: CalendarState) => state.loading
+  (state: CalendarState) => state.loading,
 );
 
 export const selectCalendarNotes = createSelector(
   selectCalendarStore,
-  (state: CalendarState) => state.calendarNotes
+  (state: CalendarState) => state.calendarNotes,
 );
 
 export const selectTodoNotes = createSelector(
   selectCalendarStore,
-  (state: CalendarState) => state.todoNotes
+  (state: CalendarState) => state.todoNotes,
 );
 
 export const selectNotesError = createSelector(
   selectCalendarStore,
-  (state: CalendarState) => state.error
+  (state: CalendarState) => state.error,
 );
 
 export const selectIsNotesLoaded = createSelector(
   selectCalendarStore,
-  (state: CalendarState) => state.loaded
+  (state: CalendarState) => state.loaded,
 );
 
 export const selectIsRequestSucceded = createSelector(
   selectCalendarStore,
-  (state: CalendarState) => state.requestSuccess
+  (state: CalendarState) => state.requestSuccess,
 );
 
 export const selectNotesForDay = createSelector(
   selectCalendarStore,
-  (state: CalendarState, date: string) => state.calendarNotes && state.calendarNotes[date]
+  (state: CalendarState, date: string) =>
+    state.calendarNotes && state.calendarNotes[date],
 );
 
 export const selectMinRowsCount = createSelector(
   selectCalendarStore,
-  (state: CalendarState) => state.minRowsCount
+  (state: CalendarState) => state.minRowsCount,
 );

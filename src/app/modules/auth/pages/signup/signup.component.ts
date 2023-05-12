@@ -4,7 +4,11 @@ import { VALIDATION_ERRORS, VALIDATORS } from '../../const/validators.const';
 import { repassValidators } from '../../utils/repass-validators.util';
 import { Store } from '@ngrx/store';
 import { clearRegistrationLogin, signUp } from '../../store/auth.actions';
-import { selectError, selectLoading, selectRegistrationLogin } from '../../store/auth.selectors';
+import {
+  selectError,
+  selectLoading,
+  selectRegistrationLogin,
+} from '../../store/auth.selectors';
 import { filter } from 'rxjs';
 import { AppState } from '../../../../models/app-state.model';
 import { Router } from '@angular/router';
@@ -20,7 +24,7 @@ interface IRegistrationForm {
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.less']
+  styleUrls: ['./signup.component.less'],
 })
 export class SignupComponent {
   loading = false;
@@ -29,32 +33,33 @@ export class SignupComponent {
       username: ['', VALIDATORS.LOGIN],
       email: ['', VALIDATORS.EMAIL_REQUIRED],
       pass: ['', VALIDATORS.PASS],
-      repass: ['', VALIDATORS.PASS]
+      repass: ['', VALIDATORS.PASS],
     },
     {
       validators: repassValidators,
-      updateOn: 'change'
-    }
+      updateOn: 'change',
+    },
   ) as FormGroup<IRegistrationForm>;
 
   errors = {
     username: VALIDATION_ERRORS.LOGIN,
     email: VALIDATION_ERRORS.EMAIL_REQUIRED,
     pass: VALIDATION_ERRORS.PASS,
-    repass: VALIDATION_ERRORS.REPASS
-  }
+    repass: VALIDATION_ERRORS.REPASS,
+  };
 
   constructor(
     private readonly fb: FormBuilder,
     private store: Store<AppState>,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {
-    this.store.select(selectLoading).subscribe(loading => (this.loading = loading));
-    this.store.select(selectRegistrationLogin)
-      .pipe(
-        filter(Boolean),
-      )
+    this.store
+      .select(selectLoading)
+      .subscribe(loading => (this.loading = loading));
+    this.store
+      .select(selectRegistrationLogin)
+      .pipe(filter(Boolean))
       .subscribe(() => {
         this.snackBar.open('Account has been successfully created', undefined, {
           duration: 3000000,
@@ -62,13 +67,12 @@ export class SignupComponent {
         this.router.navigate(['/auth/signin']);
       });
 
-    this.store.select(selectError)
-      .pipe(
-        filter(Boolean),
-      )
-      .subscribe((error) => {
+    this.store
+      .select(selectError)
+      .pipe(filter(Boolean))
+      .subscribe(error => {
         this.snackBar.open(error, undefined, {
-          duration: 5000
+          duration: 5000,
         });
       });
   }

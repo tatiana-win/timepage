@@ -6,10 +6,12 @@ import {
   deleteNote,
   loadCalendarNotes,
   loadNotesError,
-  loadTodoNotes, resetRequestSucceded,
+  loadTodoNotes,
+  resetRequestSucceded,
   todoNotesLoaded,
   setRequestSucceded,
-  updateNote, updateMinRowsCount
+  updateNote,
+  updateMinRowsCount,
 } from './calendar.actions';
 
 const MIN_ROWS_COUNT = 6;
@@ -29,70 +31,70 @@ export const initialState: CalendarState = {
   todoNotes: [],
   loaded: false,
   requestSuccess: false,
-  minRowsCount: MIN_ROWS_COUNT
+  minRowsCount: MIN_ROWS_COUNT,
 };
 
 export const calendarReducer = createReducer(
   initialState,
-  on(loadCalendarNotes, (state) => ({
+  on(loadCalendarNotes, state => ({
     ...state,
     error: undefined,
     loading: true,
   })),
-  on(loadTodoNotes, (state) => ({
+  on(loadTodoNotes, state => ({
     ...state,
     error: undefined,
     loading: true,
   })),
-  on(calendarNotesLoaded, (state, {calendarNotes}) => ({
+  on(calendarNotesLoaded, (state, { calendarNotes }) => ({
     ...state,
     error: undefined,
     loading: false,
     loaded: true,
     calendarNotes,
   })),
-  on(todoNotesLoaded, (state, {todoNotes}) => ({
+  on(todoNotesLoaded, (state, { todoNotes }) => ({
     ...state,
     error: undefined,
     loading: false,
     loaded: true,
     todoNotes,
   })),
-  on(loadNotesError, (state, {error}) => ({
+  on(loadNotesError, (state, { error }) => ({
     ...state,
     error,
-    loading: false
+    loading: false,
   })),
-  on(createNote, (state) => ({
+  on(createNote, state => ({
     ...state,
     error: undefined,
     requestSuccess: false,
-    loading: true
+    loading: true,
   })),
-  on(updateNote, (state) => ({
+  on(updateNote, state => ({
     ...state,
     error: undefined,
     requestSuccess: false,
-    loading: true
+    loading: true,
   })),
-  on(deleteNote, (state) => ({
+  on(deleteNote, state => ({
     ...state,
     error: undefined,
     requestSuccess: false,
-    loading: true
+    loading: true,
   })),
-  on(setRequestSucceded, (state) => ({
+  on(setRequestSucceded, state => ({
     ...state,
     error: undefined,
     requestSuccess: true,
-    loading: false
+    loading: false,
   })),
-  on(resetRequestSucceded, (state) => ({
+  on(resetRequestSucceded, state => ({
     ...state,
     requestSuccess: false,
   })),
   on(updateMinRowsCount, (state, { count }) => ({
     ...state,
     minRowsCount: count,
-  }))
+  })),
 );

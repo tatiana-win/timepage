@@ -2,7 +2,12 @@ import { Component } from '@angular/core';
 import { AppState } from '../../../../models/app-state.model';
 import { Store } from '@ngrx/store';
 import { loadCalendarNotes, loadTodoNotes } from '../../store/calendar.actions';
-import { addDays, getEndOfWeek, getStartOfWeek, subtractDays } from '../../../../helpers/date.util';
+import {
+  addDays,
+  getEndOfWeek,
+  getStartOfWeek,
+  subtractDays,
+} from '../../../../helpers/date.util';
 import { formatDateForApi } from '../../../../helpers/formatter.util';
 import { filter } from 'rxjs';
 import { selectNotesError } from '../../store/calendar.selectors';
@@ -13,10 +18,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.less']
+  styleUrls: ['./calendar.component.less'],
 })
 export class CalendarComponent {
-
   startDate: Date;
   endDate: Date;
   now = new Date();
@@ -25,7 +29,7 @@ export class CalendarComponent {
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {
     this.startDate = getStartOfWeek(new Date());
     this.endDate = getEndOfWeek(new Date());
@@ -35,13 +39,12 @@ export class CalendarComponent {
     this.getNotes();
     this.store.dispatch(loadTodoNotes());
 
-    this.store.select(selectNotesError)
-      .pipe(
-        filter(Boolean),
-      )
-      .subscribe((error) => {
+    this.store
+      .select(selectNotesError)
+      .pipe(filter(Boolean))
+      .subscribe(error => {
         this.snackBar.open(error, undefined, {
-          duration: 5000
+          duration: 5000,
         });
       });
   }
@@ -59,7 +62,12 @@ export class CalendarComponent {
   }
 
   private getNotes() {
-    this.store.dispatch(loadCalendarNotes({ startDate: formatDateForApi(this.startDate), endDate: formatDateForApi(this.endDate) }))
+    this.store.dispatch(
+      loadCalendarNotes({
+        startDate: formatDateForApi(this.startDate),
+        endDate: formatDateForApi(this.endDate),
+      }),
+    );
   }
 
   logout() {

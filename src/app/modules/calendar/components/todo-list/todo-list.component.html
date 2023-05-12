@@ -1,7 +1,12 @@
 <div>
   <div class="todo-header">
     <span class="todo-title">Someday</span>
-    <button mat-icon-button (click)="openDialog()" data-testid="add-todo" class="todo-add">
+    <button
+      mat-icon-button
+      (click)="openDialog()"
+      data-testid="add-todo"
+      class="todo-add"
+    >
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -11,7 +16,7 @@
         [row]="row"
         (rowClick)="openDialog($event.id)"
         (rowChange)="updateCompleted($event)"
-        [attr.data-testid]= "'row' + ' ' + (i + 1)"
+        [attr.data-testid]="'row' + ' ' + (i + 1)"
       ></app-row>
     </ng-container>
   </div>

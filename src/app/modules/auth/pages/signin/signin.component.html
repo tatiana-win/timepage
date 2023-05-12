@@ -1,13 +1,27 @@
 <div class="page">
   <header class="title" data-testid="title">Sign In</header>
-  <form class="form" novalidate [formGroup]="logInForm" (keydown.enter)="!isDisabled && onLogin()">
+  <form
+    class="form"
+    novalidate
+    [formGroup]="logInForm"
+    (keydown.enter)="!isDisabled && onLogin()"
+  >
     <mat-form-field>
       <mat-label>Username</mat-label>
-      <input matInput [formControl]="logInForm.controls.username" data-testid="username">
+      <input
+        matInput
+        [formControl]="logInForm.controls.username"
+        data-testid="username"
+      />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput type="password" [formControl]="logInForm.controls.pass" data-testid="password">
+      <input
+        matInput
+        type="password"
+        [formControl]="logInForm.controls.pass"
+        data-testid="password"
+      />
     </mat-form-field>
     <button
       class="login-button"
@@ -22,7 +36,12 @@
     <div class="divider"></div>
     <div class="login-block">
       <span>Don't have an account?</span>
-      <a class="login-registration link" routerLink="/auth/signup" data-testid="signup">Sign Up</a>
+      <a
+        class="login-registration link"
+        routerLink="/auth/signup"
+        data-testid="signup"
+        >Sign Up</a
+      >
     </div>
   </form>
 </div>

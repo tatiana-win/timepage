@@ -1,8 +1,8 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { formatToMonthAndYear } from '../../../helpers/formatter.util';
 
 @Pipe({
-  name: 'headerDate'
+  name: 'headerDate',
 })
 export class HeaderDatePipe implements PipeTransform {
   transform(date: Date): string {

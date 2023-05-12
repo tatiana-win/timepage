@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Row } from '../../models/row.model';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 
@@ -6,14 +12,14 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
   selector: 'app-row',
   templateUrl: './row.component.html',
   styleUrls: ['./row.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RowComponent {
   @Input() row!: Row;
   @Input() interactive?: boolean;
 
-  @Output() rowClick = new EventEmitter<Row>;
-  @Output() rowChange = new EventEmitter<Row>;
+  @Output() rowClick = new EventEmitter<Row>();
+  @Output() rowChange = new EventEmitter<Row>();
 
   get isInteractive() {
     return !!this.row.text || this.interactive;

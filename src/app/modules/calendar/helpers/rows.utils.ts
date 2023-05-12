@@ -6,7 +6,7 @@ export const fillRows = (notes: Note[], minCount: number) => {
     id: note.id,
     text: note.title,
     color: note.color,
-    completed: note.completed
+    completed: note.completed,
   }));
 
   if (notes.length < minCount) {
@@ -17,4 +17,4 @@ export const fillRows = (notes: Note[], minCount: number) => {
   }
 
   return rows;
-}
+};

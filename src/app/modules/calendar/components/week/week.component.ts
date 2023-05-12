@@ -1,12 +1,10 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { addDays } from '../../../../helpers/date.util';
 
-
-
 @Component({
   selector: 'app-week',
   templateUrl: './week.component.html',
-  styleUrls: ['./week.component.less']
+  styleUrls: ['./week.component.less'],
 })
 export class WeekComponent {
   @Input() startDate!: Date;
@@ -25,10 +23,9 @@ export class WeekComponent {
   }
 
   private fillDates(startDate: Date) {
-    this.dates = []
-    for(let i = 0; i < 7; i++) {
+    this.dates = [];
+    for (let i = 0; i < 7; i++) {
       this.dates.push(addDays(startDate, i));
     }
   }
-
 }

@@ -14,6 +14,6 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatInputModule,
   ],
-  exports: [InputErrorComponent]
+  exports: [InputErrorComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

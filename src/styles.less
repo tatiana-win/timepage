@@ -1,8 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import './variables';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 .page {
   display: flex;
@@ -34,7 +40,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-decoration: underline;
   color: @base-color;
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     color: @active-color;
   }
 }
@@ -64,4 +71,3 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     min-width: 300px;
   }
 }
-
