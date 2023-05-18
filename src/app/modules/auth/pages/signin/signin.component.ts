@@ -10,7 +10,7 @@ import {
   clearRegistrationLogin,
   signIn,
 } from '../../store/auth.actions';
-import { filter, Observable } from 'rxjs';
+import { filter, Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../models/app-state.model';
 import {
@@ -32,12 +32,15 @@ interface ILogInForm {
   styleUrls: ['./signin.component.less'],
 })
 export class SigninComponent {
-  loading$: Observable<boolean>;
   loading = false;
   logInForm = this.fb.group({
     username: ['', [Validators.required]],
     pass: ['', [Validators.required]],
   }) as FormGroup<ILogInForm>;
+
+  errorSubscription: Subscription;
+  loadingSubscription: Subscription;
+  isAuthSubscription: Subscription;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -45,9 +48,10 @@ export class SigninComponent {
     private router: Router,
     private snackBar: MatSnackBar,
   ) {
-    this.loading$ = this.store.select(selectLoading);
-    this.loading$.subscribe(loading => (this.loading = loading));
-    this.store
+    this.loadingSubscription = this.store
+      .select(selectLoading)
+      .subscribe(loading => (this.loading = loading));
+    this.errorSubscription = this.store
       .select(selectError)
       .pipe(filter(Boolean))
       .subscribe(error => {
@@ -55,7 +59,7 @@ export class SigninComponent {
           duration: 5000,
         });
       });
-    this.store
+    this.isAuthSubscription = this.store
       .select(selectIsAuth)
       .pipe(filter(Boolean))
       .subscribe(error => {
@@ -65,6 +69,9 @@ export class SigninComponent {
 
   ngOnDestroy() {
     this.store.dispatch(clearAuth());
+    this.errorSubscription.unsubscribe();
+    this.loadingSubscription.unsubscribe();
+    this.isAuthSubscription.unsubscribe();
   }
 
   get isDisabled(): boolean {

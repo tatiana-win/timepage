@@ -9,7 +9,7 @@ import {
   selectLoading,
   selectRegistrationLogin,
 } from '../../store/auth.selectors';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { AppState } from '../../../../models/app-state.model';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -41,6 +41,10 @@ export class SignupComponent {
     },
   ) as FormGroup<IRegistrationForm>;
 
+  loadingSubscription: Subscription;
+  errorSubscription: Subscription;
+  registrationSubscrption: Subscription;
+
   errors = {
     username: VALIDATION_ERRORS.LOGIN,
     email: VALIDATION_ERRORS.EMAIL_REQUIRED,
@@ -54,10 +58,10 @@ export class SignupComponent {
     private router: Router,
     private snackBar: MatSnackBar,
   ) {
-    this.store
+    this.loadingSubscription = this.store
       .select(selectLoading)
       .subscribe(loading => (this.loading = loading));
-    this.store
+    this.registrationSubscrption = this.store
       .select(selectRegistrationLogin)
       .pipe(filter(Boolean))
       .subscribe(() => {
@@ -67,7 +71,7 @@ export class SignupComponent {
         this.router.navigate(['/auth/signin']);
       });
 
-    this.store
+    this.errorSubscription = this.store
       .select(selectError)
       .pipe(filter(Boolean))
       .subscribe(error => {
@@ -79,6 +83,9 @@ export class SignupComponent {
 
   ngOnDestroy() {
     this.store.dispatch(clearRegistrationLogin());
+    this.loadingSubscription.unsubscribe();
+    this.registrationSubscrption.unsubscribe();
+    this.errorSubscription.unsubscribe();
   }
 
   get isDisabled(): boolean {

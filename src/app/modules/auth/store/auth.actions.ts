@@ -26,3 +26,5 @@ export const clearRegistrationLogin = createAction(
   '[Auth] Clear Registration Login',
 );
 export const clearAuth = createAction('[Auth] Clear Auth');
+
+export const logout = createAction('[Auth] Logout');

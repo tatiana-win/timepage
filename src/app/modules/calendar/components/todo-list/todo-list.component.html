@@ -16,6 +16,7 @@
         [row]="row"
         (rowClick)="openDialog($event.id)"
         (rowChange)="updateCompleted($event)"
+        [interactive]="i === notes.length"
         [attr.data-testid]="'row' + ' ' + (i + 1)"
       ></app-row>
     </ng-container>

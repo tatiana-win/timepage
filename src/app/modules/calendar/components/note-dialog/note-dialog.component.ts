@@ -17,7 +17,7 @@ import {
   resetRequestSucceded,
   updateNote,
 } from '../../store/calendar.actions';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { selectIsRequestSucceded } from '../../store/calendar.selectors';
 import { getEndOfWeek, getStartOfWeek } from '../../../../helpers/date.util';
 import {
@@ -58,6 +58,8 @@ export class NoteDialogComponent {
   date?: Date;
   withDate: boolean;
 
+  successSubscription?: Subscription;
+
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<NoteDialogComponent>,
@@ -77,7 +79,7 @@ export class NoteDialogComponent {
   }
 
   ngOnInit() {
-    this.store
+    this.successSubscription = this.store
       .select(selectIsRequestSucceded)
       .pipe(filter(Boolean))
       .subscribe(() => {
@@ -96,6 +98,10 @@ export class NoteDialogComponent {
           this.store.dispatch(loadTodoNotes());
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.successSubscription?.unsubscribe();
   }
 
   save() {

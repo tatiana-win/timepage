@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 import {
   authError,
   loginSuccess,
+  logout,
   registerSuccess,
   signIn,
   signUp,
@@ -32,9 +33,23 @@ export class AuthEffects {
       ofType(signIn.type),
       exhaustMap(({ username, password }) =>
         this.authService.login(username, password).pipe(
-          map(({ accessToken }) => {
+          map(() => {
             return loginSuccess();
           }),
+          catchError(error =>
+            of(authError({ error: error?.error?.message || 'Unknown error' })),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  logout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(logout.type),
+      exhaustMap(() =>
+        this.authService.logout().pipe(
+          map(() => authError({ error: '' })),
           catchError(error =>
             of(authError({ error: error?.error?.message || 'Unknown error' })),
           ),

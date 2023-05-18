@@ -8,6 +8,7 @@ import { fillRows } from '../../helpers/rows.utils';
 import { NoteDialogComponent } from '../note-dialog/note-dialog.component';
 import { updateNote } from '../../store/calendar.actions';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 const MIN_ROWS_COUNT = 12;
 
@@ -22,22 +23,29 @@ export class TodoListComponent {
   rows: Row[] = [];
 
   minRowsCount = MIN_ROWS_COUNT;
+  notesSubscription: Subscription;
 
   constructor(public dialog: MatDialog, private store: Store<AppState>) {
-    this.store.select(selectTodoNotes).subscribe(notes => {
-      this.notes = notes ?? [];
-      const minRowsCount =
-        this.minRowsCount > this.notes.length
-          ? this.minRowsCount
-          : this.notes.length + 3 - (this.notes.length % 3);
+    this.notesSubscription = this.store
+      .select(selectTodoNotes)
+      .subscribe(notes => {
+        this.notes = notes ?? [];
+        const minRowsCount =
+          this.minRowsCount > this.notes.length
+            ? this.minRowsCount
+            : this.notes.length + 3 - (this.notes.length % 3);
 
-      if (minRowsCount > this.minRowsCount) {
-        this.minRowsCount = minRowsCount;
-      }
+        if (minRowsCount > this.minRowsCount) {
+          this.minRowsCount = minRowsCount;
+        }
 
-      this.rows = fillRows(this.notes, minRowsCount);
-    });
+        this.rows = fillRows(this.notes, minRowsCount);
+      });
     this.rows = fillRows(this.notes, MIN_ROWS_COUNT);
+  }
+
+  ngOnDestroy() {
+    this.notesSubscription.unsubscribe();
   }
 
   openDialog(id?: string): void {

@@ -9,11 +9,12 @@ import {
   subtractDays,
 } from '../../../../helpers/date.util';
 import { formatDateForApi } from '../../../../helpers/formatter.util';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { selectNotesError } from '../../store/calendar.selectors';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Router } from '@angular/router';
+import { logout } from '../../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-calendar',
@@ -23,7 +24,7 @@ import { Router } from '@angular/router';
 export class CalendarComponent {
   startDate: Date;
   endDate: Date;
-  now = new Date();
+  errorSubscription?: Subscription;
 
   constructor(
     private store: Store<AppState>,
@@ -39,7 +40,7 @@ export class CalendarComponent {
     this.getNotes();
     this.store.dispatch(loadTodoNotes());
 
-    this.store
+    this.errorSubscription = this.store
       .select(selectNotesError)
       .pipe(filter(Boolean))
       .subscribe(error => {
@@ -47,6 +48,10 @@ export class CalendarComponent {
           duration: 5000,
         });
       });
+  }
+
+  ngOnDestroy() {
+    this.errorSubscription?.unsubscribe();
   }
 
   onBackClick() {
@@ -71,8 +76,6 @@ export class CalendarComponent {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.router.navigate(['/auth/signin']);
-    });
+    this.store.dispatch(logout());
   }
 }

@@ -17,7 +17,7 @@ import {
   selectNotesError,
   selectNotesForDay,
 } from '../../store/calendar.selectors';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import {
   createNote,
@@ -38,11 +38,13 @@ export class DayComponent {
   notes: Note[] = [];
 
   rows: Row[] = [];
+  notesSubscription?: Subscription;
+  rowsCountSubscrption?: Subscription;
 
   constructor(public dialog: MatDialog, private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.store
+    this.notesSubscription = this.store
       .select(selectNotesForDay, this.date.toISOString().split('T')[0])
       .subscribe(notes => {
         this.notes = notes ?? [];
@@ -56,7 +58,7 @@ export class DayComponent {
         }
         this.rows = fillRows(this.notes, minRowsCount);
       });
-    this.store
+    this.rowsCountSubscrption = this.store
       .select(selectMinRowsCount, this.date.toISOString().split('T')[0])
       .subscribe(count => {
         this.minRowCount = count;
@@ -69,6 +71,11 @@ export class DayComponent {
     if (changes['minRowsCount']) {
       this.rows = fillRows(this.notes, changes['minRowsCount'].currentValue);
     }
+  }
+
+  ngOnDestroy() {
+    this.rowsCountSubscrption?.unsubscribe();
+    this.notesSubscription?.unsubscribe();
   }
 
   get isActive() {
