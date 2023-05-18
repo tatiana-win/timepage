@@ -3,9 +3,9 @@
  * @param date
  */
 export const getStartOfWeek = (date: Date) => {
-  const dayOfWeek = date.getDay();
+  const dayOfWeek = date.getDay() > 0 ? date.getDay() - 1 : 6;
   const result = new Date(date);
-  result.setDate(date.getDate() - dayOfWeek + 1);
+  result.setDate(date.getDate() - dayOfWeek);
 
   return result;
 };

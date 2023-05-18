@@ -23,12 +23,16 @@ import { getEndOfWeek, getStartOfWeek } from '../../../../helpers/date.util';
 import {
   formatDateForApi,
   formatDateWithTimeForApi,
+  formatEndDayForApi,
+  formatTime,
 } from '../../../../helpers/formatter.util';
 
 interface INoteForm {
   title: FormControl<string>;
   date: FormControl<Date>;
   color: FormControl<string>;
+  hasTime: FormControl<boolean>;
+  time: FormControl<string>;
 }
 
 interface DialogData {
@@ -52,6 +56,8 @@ export class NoteDialogComponent {
     title: ['', [Validators.required]],
     date: [new Date(), [Validators.required]],
     color: [DEFAULT_STYLE],
+    hasTime: [false],
+    time: ['00:00'],
   }) as FormGroup<INoteForm>;
 
   note?: Note;
@@ -72,10 +78,20 @@ export class NoteDialogComponent {
         ? new Date(data.note.date)
         : data.date || new Date(),
       color: data.note?.color || DEFAULT_STYLE,
+      time:
+        data.note?.hasTime && data.note?.date
+          ? formatTime(new Date(data.note.date))
+          : '00:00',
+      hasTime: !!data.note?.hasTime,
     });
     this.note = data.note;
     this.date = data.date;
     this.withDate = data.withDate;
+    if (data.note?.hasTime) {
+      this.noteForm.controls.time.enable();
+    } else {
+      this.noteForm.controls.time.disable();
+    }
   }
 
   ngOnInit() {
@@ -91,7 +107,7 @@ export class NoteDialogComponent {
           this.store.dispatch(
             loadCalendarNotes({
               startDate: formatDateForApi(startDate),
-              endDate: formatDateForApi(endDate),
+              endDate: formatEndDayForApi(endDate),
             }),
           );
         } else {
@@ -105,7 +121,7 @@ export class NoteDialogComponent {
   }
 
   save() {
-    const { title, date, color } = this.noteForm.value;
+    const { title, date, color, hasTime, time } = this.noteForm.value;
     if (!title || !date) {
       return;
     }
@@ -114,14 +130,20 @@ export class NoteDialogComponent {
       ? {
           ...this.note,
           title,
-          date: this.withDate ? formatDateWithTimeForApi(date) : undefined,
+          date: this.withDate
+            ? formatDateWithTimeForApi(date, hasTime ? time : undefined)
+            : undefined,
           color,
+          hasTime,
         }
       : {
           title,
-          date: this.withDate ? formatDateWithTimeForApi(date) : undefined,
+          date: this.withDate
+            ? formatDateWithTimeForApi(date, hasTime ? time : undefined)
+            : undefined,
           color,
           completed: false,
+          hasTime,
         };
 
     this.store.dispatch(
@@ -132,6 +154,14 @@ export class NoteDialogComponent {
   delete() {
     if (this.note) {
       this.store.dispatch(deleteNote(this.note));
+    }
+  }
+
+  triggerTime() {
+    if (this.noteForm.controls.hasTime.value) {
+      this.noteForm.controls.time.enable();
+    } else {
+      this.noteForm.controls.time.disable();
     }
   }
 }

@@ -5,4 +5,5 @@ export interface Note {
   color?: string;
   completed: boolean;
   date?: string;
+  hasTime?: boolean;
 }

@@ -14,6 +14,8 @@ import {
   setRequestSucceded,
   updateNote,
 } from './calendar.actions';
+import { formatNotes } from '../helpers/notes.utils';
+import { Note } from '../../../models/note.model';
 
 @Injectable()
 export class CalendarEffects {
@@ -22,6 +24,9 @@ export class CalendarEffects {
       ofType(loadCalendarNotes.type),
       exhaustMap(({ startDate, endDate }) =>
         this.notesService.getNotes(startDate, endDate).pipe(
+          map(result =>
+            !!startDate && !!endDate ? formatNotes(result as Note[]) : result,
+          ),
           map(result => calendarNotesLoaded({ calendarNotes: result })),
           catchError(error =>
             of(

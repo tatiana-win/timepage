@@ -10,6 +10,9 @@
       !!row.completed ? 'row-text__completed' : ''
     ]"
   >
+    <span *ngIf="row.time" class="time">
+      {{ row.time }}
+    </span>
     {{ row.text }}
   </span>
   <mat-checkbox

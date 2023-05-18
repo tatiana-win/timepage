@@ -14,18 +14,30 @@ const monthNames = [
 ];
 
 const weekDaysNames = ['San', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const addLeadingZero = (value: number) => {
+export const addLeadingZero = (value: number) => {
   return value < 10 ? `0${value}` : value;
 };
 
 /**
- * Returns string with format '2023-04-15'
+ * Returns string with format '2023-04-15:00:00.000Z'
  * @param date
  */
 export const formatDateForApi = (date: Date) => {
-  return `${date.getFullYear()}-${addLeadingZero(
-    date.getMonth() + 1,
-  )}-${addLeadingZero(date.getDate())}`;
+  const newDate = new Date(
+    `${date.getFullYear()}-${addLeadingZero(
+      date.getMonth() + 1,
+    )}-${addLeadingZero(date.getDate())}:00:00:00`,
+  );
+  return newDate.toISOString();
+};
+
+export const formatEndDayForApi = (date: Date) => {
+  const newDate = new Date(
+    `${date.getFullYear()}-${addLeadingZero(
+      date.getMonth() + 1,
+    )}-${addLeadingZero(date.getDate())}:23:59:59`,
+  );
+  return newDate.toISOString();
 };
 
 /**
@@ -55,11 +67,25 @@ export const formatToDayOfWeek = (date: Date) => {
 };
 
 /**
- * Returns string with format '2023-05-01T01:00:00.000Z'
+ * Returns string with format '2023-05-01T00:00:10.000Z'
+ * @param date
+ * @param time
+ */
+export const formatDateWithTimeForApi = (date: Date, time?: string) => {
+  const newDate = new Date(
+    `${date.getFullYear()}-${addLeadingZero(
+      date.getMonth() + 1,
+    )}-${addLeadingZero(date.getDate())}T${time ?? '00:00'}:10`,
+  );
+  return newDate.toISOString();
+};
+
+/**
+ * Returns string with format '12:10'
  * @param date
  */
-export const formatDateWithTimeForApi = (date: Date) => {
-  return `${date.getFullYear()}-${addLeadingZero(
-    date.getMonth() + 1,
-  )}-${addLeadingZero(date.getDate())}T01:00:00.000Z`;
+export const formatTime = (date: Date) => {
+  return `${addLeadingZero(date.getHours())}:${addLeadingZero(
+    date.getMinutes(),
+  )}`;
 };

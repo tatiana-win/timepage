@@ -41,6 +41,23 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div class="dialog-row">
+      <mat-checkbox
+        [formControl]="noteForm.controls.hasTime"
+        (change)="triggerTime()"
+        class="dialog-checkbox"
+      >
+        Time
+      </mat-checkbox>
+      <mat-form-field>
+        <input
+          matInput
+          [formControl]="noteForm.controls.time"
+          data-testid="time"
+          type="time"
+        />
+      </mat-form-field>
+    </div>
   </form>
 </div>
 <div class="dialog-footer">

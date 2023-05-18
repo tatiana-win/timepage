@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { isToday } from '../../../../helpers/date.util';
 import { Note } from '../../../../models/note.model';
 import { Row } from '../../models/row.model';
@@ -14,17 +8,12 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../../models/app-state.model';
 import {
   selectMinRowsCount,
-  selectNotesError,
   selectNotesForDay,
 } from '../../store/calendar.selectors';
-import { filter, Subscription } from 'rxjs';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import {
-  createNote,
-  updateMinRowsCount,
-  updateNote,
-} from '../../store/calendar.actions';
+import { Subscription } from 'rxjs';
+import { updateMinRowsCount, updateNote } from '../../store/calendar.actions';
 import { fillRows } from '../../helpers/rows.utils';
+import { formatToDateAndMonth } from '../../../../helpers/formatter.util';
 
 @Component({
   selector: 'app-day',
@@ -45,7 +34,7 @@ export class DayComponent {
 
   ngOnInit() {
     this.notesSubscription = this.store
-      .select(selectNotesForDay, this.date.toISOString().split('T')[0])
+      .select(selectNotesForDay, formatToDateAndMonth(this.date))
       .subscribe(notes => {
         this.notes = notes ?? [];
         const minRowsCount =

@@ -4,4 +4,5 @@ export interface Row {
   text?: string;
   color?: string;
   completed?: boolean;
+  time?: string;
 }

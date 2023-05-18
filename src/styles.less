@@ -46,6 +46,11 @@ body {
   }
 }
 
+.time {
+  color: @text-light;
+  margin-right: 8px;
+}
+
 .red {
   background: @red;
   color: @white;
@@ -54,6 +59,10 @@ body {
 .yellow {
   background: @yellow;
   color: @black;
+
+  .time {
+    color: @text-secondary;
+  }
 }
 
 .blue {
@@ -64,6 +73,14 @@ body {
 .green {
   background: @green;
   color: @white;
+}
+
+.red,
+.green,
+.blue {
+  .time {
+    color: #ddd;
+  }
 }
 
 @media only screen and (min-width: 350px) {

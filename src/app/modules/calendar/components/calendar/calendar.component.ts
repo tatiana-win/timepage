@@ -8,7 +8,10 @@ import {
   getStartOfWeek,
   subtractDays,
 } from '../../../../helpers/date.util';
-import { formatDateForApi } from '../../../../helpers/formatter.util';
+import {
+  formatDateForApi,
+  formatEndDayForApi,
+} from '../../../../helpers/formatter.util';
 import { filter, Subscription } from 'rxjs';
 import { selectNotesError } from '../../store/calendar.selectors';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -70,7 +73,7 @@ export class CalendarComponent {
     this.store.dispatch(
       loadCalendarNotes({
         startDate: formatDateForApi(this.startDate),
-        endDate: formatDateForApi(this.endDate),
+        endDate: formatEndDayForApi(this.endDate),
       }),
     );
   }
