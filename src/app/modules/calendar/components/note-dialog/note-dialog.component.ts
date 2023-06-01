@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Note } from '../../../../models/note.model';
+import { Note, RepeatPeriod } from '../../../../models/note.model';
 import {
   FormBuilder,
   FormControl,
@@ -33,6 +33,8 @@ interface INoteForm {
   color: FormControl<string>;
   hasTime: FormControl<boolean>;
   time: FormControl<string>;
+  repeatable: FormControl<boolean>;
+  period: FormControl<RepeatPeriod>;
 }
 
 interface DialogData {
@@ -43,6 +45,7 @@ interface DialogData {
 
 const DEFAULT_STYLE = 'default';
 const NOTE_STYLES = [DEFAULT_STYLE, 'red', 'green', 'blue', 'yellow'];
+const DEFAULT_PERIOD = RepeatPeriod.week;
 
 @Component({
   selector: 'app-note-dialog',
@@ -51,6 +54,7 @@ const NOTE_STYLES = [DEFAULT_STYLE, 'red', 'green', 'blue', 'yellow'];
 })
 export class NoteDialogComponent {
   styles = NOTE_STYLES;
+  periods = Object.values(RepeatPeriod);
 
   noteForm = this.fb.group({
     title: ['', [Validators.required]],
@@ -58,6 +62,8 @@ export class NoteDialogComponent {
     color: [DEFAULT_STYLE],
     hasTime: [false],
     time: ['00:00'],
+    repeatable: [false],
+    period: [DEFAULT_PERIOD],
   }) as FormGroup<INoteForm>;
 
   note?: Note;
@@ -83,6 +89,11 @@ export class NoteDialogComponent {
           ? formatTime(new Date(data.note.date))
           : '00:00',
       hasTime: !!data.note?.hasTime,
+      repeatable: !!data.note?.repeatable,
+      period:
+        !!data.note?.repeatable && data.note.period
+          ? data.note.period
+          : DEFAULT_PERIOD,
     });
     this.note = data.note;
     this.date = data.date;
@@ -91,6 +102,11 @@ export class NoteDialogComponent {
       this.noteForm.controls.time.enable();
     } else {
       this.noteForm.controls.time.disable();
+    }
+    if (data.note?.repeatable) {
+      this.noteForm.controls.period.enable();
+    } else {
+      this.noteForm.controls.period.disable();
     }
   }
 
@@ -121,7 +137,8 @@ export class NoteDialogComponent {
   }
 
   save() {
-    const { title, date, color, hasTime, time } = this.noteForm.value;
+    const { title, date, color, hasTime, time, repeatable, period } =
+      this.noteForm.value;
     if (!title || !date) {
       return;
     }
@@ -135,6 +152,8 @@ export class NoteDialogComponent {
             : undefined,
           color,
           hasTime,
+          repeatable,
+          period: repeatable ? period : undefined,
         }
       : {
           title,
@@ -144,6 +163,8 @@ export class NoteDialogComponent {
           color,
           completed: false,
           hasTime,
+          repeatable,
+          period: repeatable ? period : undefined,
         };
 
     this.store.dispatch(
@@ -162,6 +183,14 @@ export class NoteDialogComponent {
       this.noteForm.controls.time.enable();
     } else {
       this.noteForm.controls.time.disable();
+    }
+  }
+
+  triggerPeriod() {
+    if (this.noteForm.controls.repeatable.value) {
+      this.noteForm.controls.period.enable();
+    } else {
+      this.noteForm.controls.period.disable();
     }
   }
 }

@@ -13,7 +13,7 @@ const monthNames = [
   'December',
 ];
 
-const weekDaysNames = ['San', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const weekDaysNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 export const addLeadingZero = (value: number) => {
   return value < 10 ? `0${value}` : value;
 };

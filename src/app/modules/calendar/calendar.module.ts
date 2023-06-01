@@ -28,6 +28,7 @@ import { AuthService } from '../auth/services/auth.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { RowComponent } from './components/row/row.component';
+import { PeriodNamePipe } from './pipes/periodName.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { RowComponent } from './components/row/row.component';
     NoteDialogComponent,
     TodoListComponent,
     RowComponent,
+    PeriodNamePipe,
   ],
   imports: [
     CommonModule,

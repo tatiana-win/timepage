@@ -1,10 +1,15 @@
 @import '../../../../../variables.less';
 
-.dialog-row {
+.dialog-row,
+.dialog-checkbox-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+.dialog-checkbox-container {
+  flex-direction: row;
 }
 
 .dialog-color {
@@ -23,6 +28,7 @@
 
 .dialog-select {
   display: flex;
+  margin-left: 12px;
 }
 
 .dialog-button {

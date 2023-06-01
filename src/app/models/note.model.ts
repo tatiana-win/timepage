@@ -1,3 +1,8 @@
+export enum RepeatPeriod {
+  week = 'week',
+  month = 'month',
+  year = 'year',
+}
 export interface Note {
   id: string;
   title: string;
@@ -6,4 +11,6 @@ export interface Note {
   completed: boolean;
   date?: string;
   hasTime?: boolean;
+  repeatable?: boolean;
+  period?: RepeatPeriod;
 }
