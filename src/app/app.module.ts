@@ -11,6 +11,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { AppRouter } from './app.router';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenService } from './services/token.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AppRouter,
   ],
   providers: [
+    TokenService,
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },

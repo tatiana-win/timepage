@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { TokenService } from '../services/token.service';
 
 type HTTPRequestBody = {} | null;
 type HTTPResponseBody = {} | null;
@@ -20,7 +21,7 @@ type HTTPResponseBody = {} | null;
   providedIn: 'root',
 })
 export class ApiInterceptor implements HttpInterceptor {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private tokenService: TokenService) {}
 
   intercept(
     request: HttpRequest<HTTPRequestBody>,
@@ -30,7 +31,7 @@ export class ApiInterceptor implements HttpInterceptor {
       request.clone({
         headers: request.headers.set(
           'x-access-token',
-          localStorage.getItem('token') || '',
+          this.tokenService.getToken() || '',
         ),
       }),
     );
