@@ -11,7 +11,12 @@ import {
   selectNotesForDay,
 } from '../../store/calendar.selectors';
 import { Subscription } from 'rxjs';
-import { updateMinRowsCount, updateNote } from '../../store/calendar.actions';
+import {
+  completeNote,
+  revertNoteCompletion,
+  updateMinRowsCount,
+  updateNote,
+} from '../../store/calendar.actions';
 import { fillRows } from '../../helpers/rows.utils';
 import { formatToDateAndMonth } from '../../../../helpers/formatter.util';
 
@@ -80,8 +85,13 @@ export class DayComponent {
 
   updateCompleted(row: Row) {
     const note = this.notes.find(n => n.id === row.id);
-    if (note) {
-      this.store.dispatch(updateNote({ ...note, completed: !!row.completed }));
+    if (!note) {
+      return;
+    }
+    if (note.completed) {
+      this.store.dispatch(revertNoteCompletion(note));
+    } else {
+      this.store.dispatch(completeNote(note));
     }
   }
 }

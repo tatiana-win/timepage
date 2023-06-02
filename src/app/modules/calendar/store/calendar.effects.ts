@@ -13,6 +13,8 @@ import {
   todoNotesLoaded,
   setRequestSucceded,
   updateNote,
+  completeNote,
+  revertNoteCompletion,
 } from './calendar.actions';
 import { formatNotes } from '../helpers/notes.utils';
 import { Note } from '../../../models/note.model';
@@ -99,6 +101,42 @@ export class CalendarEffects {
       ofType(deleteNote.type),
       exhaustMap(note =>
         this.notesService.deleteNote(note).pipe(
+          map(() => setRequestSucceded()),
+          catchError(error =>
+            of(
+              loadNotesError({
+                error: error?.error?.message || 'Unknown error',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  completeNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(completeNote.type),
+      exhaustMap(note =>
+        this.notesService.completeNote(note).pipe(
+          map(() => setRequestSucceded()),
+          catchError(error =>
+            of(
+              loadNotesError({
+                error: error?.error?.message || 'Unknown error',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  revertNoteCompletion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(revertNoteCompletion.type),
+      exhaustMap(note =>
+        this.notesService.revertNoteCompletion(note).pipe(
           map(() => setRequestSucceded()),
           catchError(error =>
             of(

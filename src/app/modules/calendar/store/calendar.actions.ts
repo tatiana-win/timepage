@@ -42,3 +42,13 @@ export const updateMinRowsCount = createAction(
   '[Calendar] Update Min Rows Count',
   props<{ count: number }>(),
 );
+
+export const completeNote = createAction(
+  '[Calendar] Complete Note',
+  props<Note>(),
+);
+
+export const revertNoteCompletion = createAction(
+  '[Calendar] Revert Note Completion',
+  props<Note>(),
+);

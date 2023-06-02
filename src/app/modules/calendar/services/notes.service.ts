@@ -46,4 +46,19 @@ export class NotesService {
   deleteNote(note: Note): Observable<any> {
     return this.http.delete(`${CONFIG.apiUrl}/notes/${note.id}`, httpOptions);
   }
+
+  completeNote(note: Note): Observable<any> {
+    return this.http.post(
+      `${CONFIG.apiUrl}/notes/${note.id}/complete`,
+      { date: note.date },
+      httpOptions,
+    );
+  }
+
+  revertNoteCompletion(note: Note): Observable<any> {
+    return this.http.delete(`${CONFIG.apiUrl}/notes/${note.id}/complete`, {
+      ...httpOptions,
+      body: { date: note.date },
+    });
+  }
 }

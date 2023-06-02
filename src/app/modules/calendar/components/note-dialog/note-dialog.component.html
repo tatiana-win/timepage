@@ -13,68 +13,70 @@
         autofocus
       />
     </mat-form-field>
-    <div class="dialog-row">
-      <mat-form-field
-        class="dialog-calendar full"
-        *ngIf="withDate"
-        appearance="fill"
-      >
-        <mat-label>Choose a date</mat-label>
-        <input
-          matInput
-          [formControl]="noteForm.controls.date"
-          [matDatepicker]="picker"
-          data-testid="date"
-        />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field class="dialog-select full">
-        <mat-label>Style</mat-label>
-        <mat-select [formControl]="noteForm.controls.color" required>
-          <mat-option *ngFor="let style of styles" [value]="style">
-            <div [ngClass]="['select-text', style]">{{ style }}</div>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="dialog-checkbox-container">
-      <mat-checkbox
-        [formControl]="noteForm.controls.hasTime"
-        (change)="triggerTime()"
-        class="dialog-checkbox"
-      >
-        Time
-      </mat-checkbox>
-      <mat-form-field>
-        <input
-          matInput
-          [formControl]="noteForm.controls.time"
-          data-testid="time"
-          type="time"
-        />
-      </mat-form-field>
-    </div>
-    <div class="dialog-checkbox-container">
-      <mat-checkbox
-        [formControl]="noteForm.controls.repeatable"
-        (change)="triggerPeriod()"
-        class="dialog-checkbox"
-      >
-        Repeat
-      </mat-checkbox>
-      <mat-form-field class="dialog-select">
-        <mat-label>Period</mat-label>
-        <mat-select [formControl]="noteForm.controls.period">
-          <mat-option *ngFor="let value of periods" [value]="value">
-            <div>{{ value | periodName }}</div>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+    <ng-container *ngIf="!note?.completed">
+      <div class="dialog-row">
+        <mat-form-field
+          class="dialog-calendar full"
+          *ngIf="withDate"
+          appearance="fill"
+        >
+          <mat-label>Choose a date</mat-label>
+          <input
+            matInput
+            [formControl]="noteForm.controls.date"
+            [matDatepicker]="picker"
+            data-testid="date"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="dialog-select full">
+          <mat-label>Style</mat-label>
+          <mat-select [formControl]="noteForm.controls.color" required>
+            <mat-option *ngFor="let style of styles" [value]="style">
+              <div [ngClass]="['select-text', style]">{{ style }}</div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="dialog-checkbox-container">
+        <mat-checkbox
+          [formControl]="noteForm.controls.hasTime"
+          (change)="triggerTime()"
+          class="dialog-checkbox"
+        >
+          Time
+        </mat-checkbox>
+        <mat-form-field>
+          <input
+            matInput
+            [formControl]="noteForm.controls.time"
+            data-testid="time"
+            type="time"
+          />
+        </mat-form-field>
+      </div>
+      <div class="dialog-checkbox-container">
+        <mat-checkbox
+          [formControl]="noteForm.controls.repeatable"
+          (change)="triggerPeriod()"
+          class="dialog-checkbox"
+        >
+          Repeat
+        </mat-checkbox>
+        <mat-form-field class="dialog-select">
+          <mat-label>Period</mat-label>
+          <mat-select [formControl]="noteForm.controls.period">
+            <mat-option *ngFor="let value of periods" [value]="value">
+              <div>{{ value | periodName }}</div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-container>
   </form>
 </div>
 <div class="dialog-footer">
