@@ -5,12 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import {
-  clearAuth,
-  clearRegistrationLogin,
-  signIn,
-} from '../../store/auth.actions';
-import { filter, Observable, Subscription } from 'rxjs';
+import { clearAuth, signIn } from '../../store/auth.actions';
+import { filter, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../models/app-state.model';
 import {
@@ -62,7 +58,7 @@ export class SigninComponent {
     this.isAuthSubscription = this.store
       .select(selectIsAuth)
       .pipe(filter(Boolean))
-      .subscribe(error => {
+      .subscribe(() => {
         this.router.navigate(['/calendar']);
       });
   }

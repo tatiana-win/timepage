@@ -6,6 +6,7 @@ import {
   addDays,
   getEndOfWeek,
   getStartOfWeek,
+  isStringDateValid,
   subtractDays,
 } from '../../../../helpers/date.util';
 import {
@@ -15,8 +16,7 @@ import {
 import { filter, Subscription } from 'rxjs';
 import { selectNotesError } from '../../store/calendar.selectors';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../../../auth/services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { logout } from '../../../auth/store/auth.actions';
 
 @Component({
@@ -32,11 +32,16 @@ export class CalendarComponent {
   constructor(
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
-    private authService: AuthService,
-    private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
-    this.startDate = getStartOfWeek(new Date());
-    this.endDate = getEndOfWeek(new Date());
+    const startDate = this.activatedRoute.snapshot.queryParams['startDate'];
+    if (startDate && isStringDateValid(startDate)) {
+      this.startDate = getStartOfWeek(new Date(startDate));
+      this.endDate = getEndOfWeek(new Date(startDate));
+    } else {
+      this.startDate = getStartOfWeek(new Date());
+      this.endDate = getEndOfWeek(new Date());
+    }
   }
 
   ngOnInit() {

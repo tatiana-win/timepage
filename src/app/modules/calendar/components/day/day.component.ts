@@ -15,7 +15,6 @@ import {
   completeNote,
   revertNoteCompletion,
   updateMinRowsCount,
-  updateNote,
 } from '../../store/calendar.actions';
 import { fillRows } from '../../helpers/rows.utils';
 import { formatToDateAndMonth } from '../../../../helpers/formatter.util';

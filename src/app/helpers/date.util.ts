@@ -59,3 +59,9 @@ export const isToday = (date: Date) => {
     now.getDate() === date.getDate()
   );
 };
+
+export const isStringDateValid = (str: string) => {
+  const timestamp = Date.parse(str);
+
+  return !isNaN(timestamp);
+};
