@@ -29,6 +29,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { RowComponent } from './components/row/row.component';
 import { PeriodNamePipe } from './pipes/periodName.pipe';
+import { DeleteEventDialogComponent } from './components/delete-event-dialog/delete-event-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { PeriodNamePipe } from './pipes/periodName.pipe';
     TodoListComponent,
     RowComponent,
     PeriodNamePipe,
+    DeleteEventDialogComponent,
   ],
   imports: [
     CommonModule,

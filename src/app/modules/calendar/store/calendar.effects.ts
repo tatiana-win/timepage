@@ -15,6 +15,7 @@ import {
   updateNote,
   completeNote,
   revertNoteCompletion,
+  deleteNoteForDate,
 } from './calendar.actions';
 import { formatNotes } from '../helpers/notes.utils';
 import { Note } from '../../../models/note.model';
@@ -101,6 +102,24 @@ export class CalendarEffects {
       ofType(deleteNote.type),
       exhaustMap(note =>
         this.notesService.deleteNote(note).pipe(
+          map(() => setRequestSucceded()),
+          catchError(error =>
+            of(
+              loadNotesError({
+                error: error?.error?.message || 'Unknown error',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  deleteNoteForDate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteNoteForDate.type),
+      exhaustMap(note =>
+        this.notesService.deleteNoteForDate(note).pipe(
           map(() => setRequestSucceded()),
           catchError(error =>
             of(

@@ -32,6 +32,11 @@ export const updateNote = createAction('[Calendar] Update Note', props<Note>());
 
 export const deleteNote = createAction('[Calendar] Delete Note', props<Note>());
 
+export const deleteNoteForDate = createAction(
+  '[Calendar] Delete Note For Date',
+  props<Note>(),
+);
+
 export const setRequestSucceded = createAction('[Calendar] Request Succeded');
 
 export const resetRequestSucceded = createAction(

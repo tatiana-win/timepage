@@ -3709,6 +3709,17 @@ body {
 .blue .time {
   color: #ddd;
 }
+.dialog-close-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+.dialog-close {
+  cursor: pointer;
+}
+.dialog-close:hover {
+  color: #999;
+}
 @media only screen and (min-width: 350px) {
   .form {
     min-width: 300px;

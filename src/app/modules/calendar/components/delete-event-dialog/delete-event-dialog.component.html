@@ -1,0 +1,33 @@
+<div mat-dialog-content class="delete">
+  <div class="dialog-close-container">
+    <mat-icon class="dialog-close" (click)="cancel()">close</mat-icon>
+  </div>
+  <p class="delete-text">
+    {{ text }}
+  </p>
+  <div class="delete-buttons">
+    <button *ngIf="!note.repeatable" mat-raised-button (click)="cancel()">
+      Cancel
+    </button>
+    <button
+      *ngIf="!note.repeatable"
+      mat-raised-button
+      (click)="deleteEvent()"
+      color="primary"
+    >
+      Delete
+    </button>
+
+    <button *ngIf="note.repeatable" mat-raised-button (click)="deleteEvent()">
+      Delete this event
+    </button>
+    <button
+      *ngIf="note.repeatable"
+      mat-raised-button
+      (click)="deleteAllEvents()"
+      color="primary"
+    >
+      Delete all events
+    </button>
+  </div>
+</div>

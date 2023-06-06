@@ -47,6 +47,13 @@ export class NotesService {
     return this.http.delete(`${CONFIG.apiUrl}/notes/${note.id}`, httpOptions);
   }
 
+  deleteNoteForDate(note: Note): Observable<any> {
+    return this.http.delete(`${CONFIG.apiUrl}/notes/${note.id}`, {
+      ...httpOptions,
+      body: { date: note.date },
+    });
+  }
+
   completeNote(note: Note): Observable<any> {
     return this.http.post(
       `${CONFIG.apiUrl}/notes/${note.id}/complete`,

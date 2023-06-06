@@ -1,4 +1,8 @@
 <div mat-dialog-content class="dialog" data-testid="note-dialog">
+  <div class="dialog-close-container">
+    <mat-icon class="dialog-close" (click)="cancel()">close</mat-icon>
+  </div>
+
   <form
     class="form"
     novalidate

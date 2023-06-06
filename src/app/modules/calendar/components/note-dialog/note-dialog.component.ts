@@ -6,12 +6,17 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../models/app-state.model';
 import {
   createNote,
   deleteNote,
+  deleteNoteForDate,
   loadCalendarNotes,
   loadTodoNotes,
   resetRequestSucceded,
@@ -26,6 +31,10 @@ import {
   formatEndDayForApi,
   formatTime,
 } from '../../../../helpers/formatter.util';
+import {
+  DeleteEventDialogComponent,
+  DeleteResult,
+} from '../delete-event-dialog/delete-event-dialog.component';
 
 interface INoteForm {
   title: FormControl<string>;
@@ -77,6 +86,7 @@ export class NoteDialogComponent {
     private dialogRef: MatDialogRef<NoteDialogComponent>,
     private store: Store<AppState>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    public dialog: MatDialog,
   ) {
     this.noteForm.setValue({
       title: data.note?.title || '',
@@ -174,7 +184,19 @@ export class NoteDialogComponent {
 
   delete() {
     if (this.note) {
-      this.store.dispatch(deleteNote(this.note));
+      const ref = this.dialog.open(DeleteEventDialogComponent, {
+        data: { note: this.note },
+      });
+
+      ref.afterClosed().subscribe(result => {
+        if (!this.note || result == undefined) {
+          return;
+        }
+        if (this.note.repeatable && result === DeleteResult.one) {
+          return this.store.dispatch(deleteNoteForDate(this.note));
+        }
+        return this.store.dispatch(deleteNote(this.note));
+      });
     }
   }
 
@@ -192,5 +214,9 @@ export class NoteDialogComponent {
     } else {
       this.noteForm.controls.period.disable();
     }
+  }
+
+  cancel() {
+    this.dialogRef.close();
   }
 }
